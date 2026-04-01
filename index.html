@@ -1,11 +1,73 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=pages/index.html" />
-    <title>正在跳轉至南宮有栖的部落格...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>南宮有栖</title>
+    <meta name="description" content="南宮有栖的個人部落格，古風雅韻，詩意棲居。">
+    <link href="styles/style.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+TC:wght@400;600;700&family=ZCOOL+XiaoWei&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
-    <p>如果沒有自動跳轉，請點擊 <a href="pages/index.html">這裡前往首頁</a>。</p>
+    <nav class="top_list" id="main-nav">
+        <div class="nav-inner">
+            <div class="nav-ornament left-ornament">
+                <span class="ornament-line"></span>
+                <span class="ornament-diamond">&#9670;</span>
+            </div>
+
+            <a href="index.html" class="brand" id="brand-link">
+                <span class="brand-char" style="animation-delay: 0s">南</span>
+                <span class="brand-char" style="animation-delay: 0.1s">宮</span>
+                <span class="brand-char" style="animation-delay: 0.2s">有</span>
+                <span class="brand-char" style="animation-delay: 0.3s">栖</span>
+            </a>
+
+            <div class="nav-divider">
+                <span class="divider-dot">&#8226;</span>
+                <span class="divider-line"></span>
+                <span class="divider-dot">&#8226;</span>
+            </div>
+
+            <div class="nav-links" id="nav-links">
+                <a href="index.html" class="nav-link active" id="nav-home">
+                    <span class="link-text">首頁</span>
+                    <span class="link-sub">Home</span>
+                </a>
+                <a href="pages/solution.html" class="nav-link" id="nav-solution">
+                    <span class="link-text">題解</span>
+                    <span class="link-sub">Solution</span>
+                </a>
+                <a href="pages/blog.html" class="nav-link" id="nav-blog">
+                    <span class="link-text">部落格</span>
+                    <span class="link-sub">Blog</span>
+                </a>
+                <a href="pages/about.html" class="nav-link" id="nav-about">
+                    <span class="link-text">關於</span>
+                    <span class="link-sub">About</span>
+                </a>
+                <a href="pages/freind.html" class="nav-link" id="nav-friend">
+                    <span class="link-text">友鏈</span>
+                    <span class="link-sub">Friend</span>
+                </a>
+            </div>
+
+            <div class="nav-ornament right-ornament">
+                <span class="ornament-diamond">&#9670;</span>
+                <span class="ornament-line"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="petal-container" id="petal-container"></div>
+
+    <script src="js/petal.js"></script>
 </body>
+
 </html>
