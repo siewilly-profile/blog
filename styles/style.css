@@ -16,10 +16,10 @@
     --shadow-ink: rgba(44, 44, 44, 0.12);
     --shadow-deep: rgba(44, 44, 44, 0.25);
 
-    --font-brand: 'Ma Shan Zheng', 'KaiTi', cursive;
-    --font-nav: 'ZCOOL XiaoWei', 'Noto Serif TC', 'SimSun', serif;
-    --font-body: 'Noto Serif TC', 'SimSun', serif;
-    --font-sub: 'Noto Serif TC', Georgia, serif;
+    --font-brand: 'Ma Shan Zheng', 'LXGW WenKai TC', 'KaiTi', cursive;
+    --font-nav: 'ZCOOL XiaoWei', 'LXGW WenKai TC', 'Noto Serif TC', 'SimSun', serif;
+    --font-body: 'LXGW WenKai TC', 'Noto Serif TC', 'SimSun', serif;
+    --font-sub: 'LXGW WenKai TC', 'Noto Serif TC', Georgia, serif;
 
     --nav-height: 72px;
 }
