@@ -1202,3 +1202,77 @@ body {
     background: transparent;
     opacity: 0.85;
 }
+
+/* 友鏈卡片 (Friend Cards) */
+.friend-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.friend-card {
+    display: flex;
+    align-items: center;
+    background: var(--paper-light);
+    border: 1px solid rgba(184, 134, 11, 0.15);
+    border-radius: 12px;
+    padding: 20px 24px;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(44, 44, 44, 0.04);
+}
+
+.friend-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(44, 44, 44, 0.08);
+    border-color: rgba(194, 58, 43, 0.3);
+}
+
+.friend-avatar {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+    border: 2px solid rgba(184, 134, 11, 0.2);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(44, 44, 44, 0.1);
+}
+
+.friend-card:hover .friend-avatar {
+    transform: rotate(360deg);
+    border-color: rgba(194, 58, 43, 0.4);
+}
+
+.friend-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.friend-name {
+    font-family: var(--font-nav);
+    font-size: 20px;
+    color: var(--vermillion);
+    font-weight: bold;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.3s ease;
+    letter-spacing: 1px;
+}
+
+.friend-card:hover .friend-name {
+    color: var(--vermillion-light);
+}
+
+.friend-desc {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--ink-light);
+    line-height: 1.5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
