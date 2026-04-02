@@ -12,21 +12,18 @@
 ```
 
 # 夥伴們
-```yml
-- name: D-Sketon
-  url: "https://d-sketon.example.com"
-  desc: "一個串萬人"
-  image: "https://ui-avatars.com/api/?name=D-S&background=random"
-- name: fallingcat
-  url: "https://fallingcat.example.com"
-  desc: "fallingcat, but could also fall for you <3"
-  image: "https://ui-avatars.com/api/?name=fc&background=random"
-- name: itousouta15
-  url: "https://itousouta15.example.com"
-  desc: "幫我架網站的電神"
-  image: "https://ui-avatars.com/api/?name=15&background=random"
-- name: 伊藤喵貓
-  url: "#"
-  desc: "喵"
-  image: "https://ui-avatars.com/api/?name=伊藤&background=random"
-```
+
+<div class="friend-grid">
+
+  <!-- 燒餅不加蛋 -->
+  <a href="https://ericchen913900.github.io/" target="_blank" class="friend-card">
+    <img src="../images/shaobing_avatar.jpg" alt="avatar" class="friend-avatar" onerror="this.src='https://ui-avatars.com/api/?name=燒餅不加蛋&background=random'">
+    <div class="friend-info">
+      <div class="friend-name">燒餅不加蛋</div>
+      <div class="friend-desc">我是蛋餅</div>
+    </div>
+  </a>
+  
+  <!-- 下一個友鏈可以複製上面的 <a>...</a> 區塊貼在這裡 -->
+
+</div>

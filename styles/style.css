@@ -1232,7 +1232,7 @@ body {
 .friend-avatar {
     width: 68px;
     height: 68px;
-    border-radius: 50%;
+    border-radius: 16px; /* 圓潤的方角 */
     object-fit: cover;
     margin-right: 20px;
     border: 2px solid rgba(184, 134, 11, 0.2);
