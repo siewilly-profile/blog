@@ -68,14 +68,34 @@
         </div>
     </nav>
 
-    <div class="petal-container" id="petal-container"></div>
+
 
     <div id="solution-category" data-category="Zerojudge" data-label="Zerojudge" data-parent="solution.html"></div>
-    <div id="content"></div>
+    <div class="blog-layout">
+        <aside class="blog-sidebar" id="blog-sidebar">
+            <div class="sidebar-widget">
+                <h3 class="widget-title">搜尋題解</h3>
+                <div class="search-box">
+                    <input type="text" id="search-input" class="search-input" placeholder="輸入關鍵字...">
+                    <button id="search-btn" class="search-btn">🔍</button>
+                </div>
+            </div>
+            <div class="sidebar-widget">
+                <h3 class="widget-title">所有標籤</h3>
+                <div class="tags-cloud" id="tags-cloud">
+                    <!-- 動態載入 tags -->
+                </div>
+            </div>
+        </aside>
+
+        <main class="blog-main">
+            <div id="content"></div>
+        </main>
+    </div>
 
     <script src="../js/solution-page.js"></script>
     <script src="../js/burger.js"></script>
-    <script src="../js/petal.js"></script>
+
     <script src="../js/transition.js"></script>
 </body>
 
