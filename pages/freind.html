@@ -76,6 +76,13 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
     <script src="../js/freind.js"></script>
+    <!-- 浮動返回按鈕 -->
+    <button class="floating-back-btn" onclick="if(document.referrer) { history.back(); } else { window.location.href = '../index.html'; }" title="回到上一頁">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+        <span>点我回上页</span>
+    </button>
     <script src="../js/burger.js"></script>
 
     <script src="../js/transition.js"></script>
