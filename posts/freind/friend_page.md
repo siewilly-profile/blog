@@ -14,7 +14,38 @@
 # 夥伴們
 
 <div class="friend-grid">
-
+  <!--南宮-->
+  <a href="https://www.nangong5421.com/" target="_blank" class="friend-card">
+    <img src="../images/neangong.jpg" alt="avatar" class="friend-avatar" onerror="this.src='https://ui-avatars.com/api/?name=燒餅不加蛋&background=random'">
+    <div class="friend-info">
+      <div class="friend-name">南宮柳信</div>
+      <div class="friend-desc">我老大</div>
+    </div>
+  </a>
+  <!--台貓-->
+  <a href="https://twcat0503.org/" target="_blank" class="friend-card">
+    <img src="../images/twcat.jpg" alt="avatar" class="friend-avatar" onerror="this.src='https://ui-avatars.com/api/?name=燒餅不加蛋&background=random'">
+    <div class="friend-info">
+      <div class="friend-name">台貓</div>
+      <div class="friend-desc">喵</div>
+    </div>
+  </a>
+  <!--橘子-->
+  <a href="https://xn--gew.tw/" target="_blank" class="friend-card">
+    <img src="../images/orange.jpg" alt="avatar" class="friend-avatar" onerror="this.src='https://ui-avatars.com/api/?name=燒餅不加蛋&background=random'">
+    <div class="friend-info">
+      <div class="friend-name">橘子</div>
+      <div class="friend-desc">橘子喵</div>
+    </div>
+  </a>
+  <!--Ummlt Kin-->
+  <a href="https://ummit.dev/" target="_blank" class="friend-card">
+    <img src="../images/Ummlt.jpg" alt="avatar" class="friend-avatar" onerror="this.src='https://ui-avatars.com/api/?name=燒餅不加蛋&background=random'">
+    <div class="friend-info">
+      <div class="friend-name">Ummlt Kin</div>
+      <div class="friend-desc">Can't live without GNU/Linux</div>
+    </div>
+  </a>
   <!-- 燒餅不加蛋 -->
   <a href="https://ericchen913900.github.io/" target="_blank" class="friend-card">
     <img src="../images/shaobing_avatar.jpg" alt="avatar" class="friend-avatar" onerror="this.src='https://ui-avatars.com/api/?name=燒餅不加蛋&background=random'">
