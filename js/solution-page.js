@@ -21,7 +21,7 @@ if (postName) {
 async function fetchPosts() {
     if (allPostsData.length > 0) return allPostsData;
     try {
-        var response = await fetch('../posts/solution/' + category + '/posts.json');
+        var response = await fetch('../posts/solution/' + category + '/posts.json?t=' + new Date().getTime());
         if (response.ok) {
             allPostsData = await response.json();
             allPostsData.sort(function(a, b) {
@@ -102,7 +102,7 @@ async function renderMarkdown(slug) {
     setupSearch();
 
     try {
-        var response = await fetch('../posts/solution/' + category + '/' + slug + '.md');
+        var response = await fetch('../posts/solution/' + category + '/' + slug + '.md?t=' + new Date().getTime());
         if (!response.ok) {
             throw new Error('File not found');
         }

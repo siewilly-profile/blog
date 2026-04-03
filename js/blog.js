@@ -20,7 +20,7 @@ if (postName) {
 async function fetchPosts() {
     if (allPostsData.length > 0) return allPostsData;
     try {
-        var response = await fetch('../posts/blog/posts.json');
+        var response = await fetch('../posts/blog/posts.json?t=' + new Date().getTime());
         if (response.ok) {
             allPostsData = await response.json();
             allPostsData.sort(function(a, b) {
@@ -173,7 +173,7 @@ async function renderBlogMarkdown(slug) {
     setupSearch();
 
     try {
-        var response = await fetch('../posts/blog/' + slug + '.md');
+        var response = await fetch('../posts/blog/' + slug + '.md?t=' + new Date().getTime());
         if (!response.ok) {
             throw new Error('File not found');
         }
