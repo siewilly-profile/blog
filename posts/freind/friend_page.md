@@ -1,6 +1,6 @@
 # 本站資訊
-- 站名:南宮有栖 blog
-- 站長:南宮有栖
+- 站名:南宫有栖 blog
+- 站長:南宫有栖
 - 網址:https://new-blog.siewilly.me
 
 # 申請友鍊方法
@@ -14,11 +14,11 @@
 # 夥伴們
 
 <div class="friend-grid">
-  <!--南宮-->
+  <!--南宫-->
   <a href="https://www.nangong5421.com/" target="_blank" class="friend-card">
     <img src="../images/neangong.jpg" alt="avatar" class="friend-avatar" onerror="this.src='https://ui-avatars.com/api/?name=燒餅不加蛋&background=random'">
     <div class="friend-info">
-      <div class="friend-name">南宮柳信</div>
+      <div class="friend-name">南宫柳信</div>
       <div class="friend-desc">我老大</div>
     </div>
   </a>

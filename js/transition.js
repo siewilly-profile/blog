@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// 處理瀏覽器「上一頁」的 BFCache 問題
+// 處理瀏覽器「上一頁」的 BFCache 問题
 // 如果使用者按上一頁回來，此頁面可能是暫存的狀態（被蓋住的），需重新拉開遮罩
 window.addEventListener('pageshow', (event) => {
     if (event.persisted) {

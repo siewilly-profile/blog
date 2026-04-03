@@ -32,10 +32,10 @@ async function renderMarkdown(slug) {
         var date = postMeta ? postMeta.date : '';
         var tags = postMeta ? postMeta.tags || [] : [];
 
-        document.title = title + ' — 南宮有栖';
+        document.title = title + ' — 南宫有栖';
 
         var html = '<div class="article-header">';
-        html += '<a href="solution.html" class="back-link">← 返回題解列表</a>';
+        html += '<a href="solution.html" class="back-link">← 返回题解列表</a>';
         html += '<h1 class="article-title">' + title + '</h1>';
         html += '<div class="article-meta">';
         if (date) {
@@ -59,7 +59,7 @@ async function renderMarkdown(slug) {
     } catch (error) {
         target.innerHTML = '<div class="error-msg">'
             + '<p>無法載入文章：' + slug + '.md</p>'
-            + '<a href="solution.html">← 返回題解列表</a>'
+            + '<a href="solution.html">← 返回题解列表</a>'
             + '</div>';
     }
 }
@@ -80,7 +80,7 @@ async function renderPostList() {
         });
 
         var html = '<div class="post-list-header">';
-        html += '<h1 class="post-list-title">題解筆記</h1>';
+        html += '<h1 class="post-list-title">题解筆記</h1>';
         html += '<p class="post-list-count">共 ' + posts.length + ' 篇文章</p>';
         html += '</div>';
         html += '<div class="post-list">';

@@ -117,10 +117,10 @@ async function renderMarkdown(slug) {
         var tags = postMeta ? postMeta.tags || [] : [];
 
         var pageName = location.pathname.split('/').pop();
-        document.title = title + ' — 南宮有栖';
+        document.title = title + ' — 南宫有栖';
 
         var html = '<div class="article-header">';
-        html += '<a href="' + pageName + '" class="back-link">← 返回' + categoryLabel + '題解列表</a>';
+        html += '<a href="' + pageName + '" class="back-link">← 返回' + categoryLabel + '题解列表</a>';
         html += '<h1 class="article-title">' + title + '</h1>';
         html += '<div class="article-meta">';
         if (date) {
@@ -145,7 +145,7 @@ async function renderMarkdown(slug) {
         var pageName = location.pathname.split('/').pop();
         target.innerHTML = '<div class="error-msg">'
             + '<p>無法載入文章：' + slug + '.md</p>'
-            + '<a href="' + pageName + '">← 返回' + categoryLabel + '題解列表</a>'
+            + '<a href="' + pageName + '">← 返回' + categoryLabel + '题解列表</a>'
             + '</div>';
     }
 }
@@ -192,8 +192,8 @@ async function renderPostList() {
         html += '<h1 class="post-list-title">標籤: ' + currentTag + ' (' + categoryLabel + ')</h1>';
         html += '<a href="' + pageName + '" class="back-link">← 清除標籤過濾</a>';
     } else {
-        html += '<a href="' + parentPage + '" class="back-link">← 返回題解分類</a>';
-        html += '<h1 class="post-list-title">' + categoryLabel + ' 題解</h1>';
+        html += '<a href="' + parentPage + '" class="back-link">← 返回题解分类</a>';
+        html += '<h1 class="post-list-title">' + categoryLabel + ' 题解</h1>';
         html += '<p class="post-list-count">共 ' + filteredPosts.length + ' 篇文章</p>';
     }
     html += '</div>';

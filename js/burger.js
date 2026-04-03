@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var navItems = [
         { text: '首頁', sub: 'Home', href: prefix + 'index.html', key: 'index.html' },
-        { text: '題解', sub: 'Solution', href: pagePrefix + 'solution.html', key: 'solution.html' },
+        { text: '题解', sub: 'Solution', href: pagePrefix + 'solution.html', key: 'solution.html' },
         { text: '部落格', sub: 'Blog', href: pagePrefix + 'blog.html', key: 'blog.html' },
         { text: '關於', sub: 'About', href: pagePrefix + 'about.html', key: 'about.html' },
         { text: '友鏈', sub: 'Friend', href: pagePrefix + 'freind.html', key: 'freind.html' }
@@ -57,10 +57,10 @@ document.addEventListener('DOMContentLoaded', function () {
             '<div class="sidebar-profile">' +
                 '<div class="sidebar-avatar-wrap">' +
                     '<div class="sidebar-avatar-ring"></div>' +
-                    '<img src="' + prefix + 'images/owner_avatar.jpg" alt="南宮有栖" class="sidebar-avatar" />' +
+                    '<img src="' + prefix + 'images/owner_avatar.jpg" alt="南宫有栖" class="sidebar-avatar" />' +
                     '<div class="sidebar-stamp">栖</div>' +
                 '</div>' +
-                '<h3 class="sidebar-name">南宮有栖</h3>' +
+                '<h3 class="sidebar-name">南宫有栖</h3>' +
                 '<p class="sidebar-sub">Code Player</p>' +
             '</div>' +
             '<div class="sidebar-stats">' +
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 '<span class="stat-divider"></span>' +
                 '<div class="stat-col">' +
                     '<span class="stat-val">1</span>' +
-                    '<span class="stat-label">分類</span>' +
+                    '<span class="stat-label">分类</span>' +
                 '</div>' +
                 '<span class="stat-divider"></span>' +
                 '<div class="stat-col">' +

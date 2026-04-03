@@ -188,7 +188,7 @@ async function renderBlogMarkdown(slug) {
         var date = postMeta ? postMeta.date : '';
         var tags = postMeta ? postMeta.tags || [] : [];
 
-        document.title = title + ' — 南宮有栖';
+        document.title = title + ' — 南宫有栖';
 
         var html = '<div class="article-header">';
         html += '<a href="blog.html" class="back-link">← 返回部落格推薦列</a>';

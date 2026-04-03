@@ -2,7 +2,7 @@
     <div class="about-avatar-wrap">
         <img src="../images/owner_avatar.jpg" alt="siewilly" class="about-avatar">
     </div>
-    <h1 class="about-name">南宮有栖</h1>
+    <h1 class="about-name">南宫有栖</h1>
     <p class="about-subtitle">資訊安全 & 演算法</p>
     <div class="about-socials">
         <a href="#" class="social-badge badge-x">𝕏 X</a>
@@ -28,7 +28,7 @@
             平常喜歡 <strong>Coding 💻</strong> 和 <strong>打羽球 🏸</strong> (<s>每天都在 bug 裡面越爬越強！</s>)
         </div>
         <ul>
-            <li>🔍 喜歡探索演算法的結構、自己寫題目練演算法</li>
+            <li>🔍 喜歡探索演算法的結構、自己寫题目練演算法</li>
             <li>🧠 目前正在研究 CTF (<s>雖然很廢但會慢慢進步</s>)</li>
             <li>⚫ 圍棋是我的唯一爹（超認真）</li>
         </ul>
@@ -40,7 +40,7 @@
 <ul>
     <li>🐍 把 Python 學到精透</li>
     <li>🌐 套模板寫出自己的網站</li>
-    <li>📚 把自己的所有解題丟上來分享（進行中 ✅）</li>
+    <li>📚 把自己的所有解题丟上來分享（進行中 ✅）</li>
 </ul>
 
 <div class="about-divider"></div>
@@ -62,8 +62,8 @@
 <ul>
     <li>💼 進入 <strong>資奧選訓營</strong></li>
     <li>🏆 進到資訊學科競賽全國賽</li>
-    <li>🧪 CTF 能看得懂題目</li>
-    <li>📁 把我的所有解題丟上來分享</li>
+    <li>🧪 CTF 能看得懂题目</li>
+    <li>📁 把我的所有解题丟上來分享</li>
     <li>🎓 考上交通大學資工系(<s>宏願的部分</s>)</li>
     <li>🎫 取得 AIS3 門票！</li>
 </ul>
