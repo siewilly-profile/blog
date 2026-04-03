@@ -1,9 +1,12 @@
 [
     {
-        "slug": "a00",
-        "title": "Zerojudge a00",
-        "date": "2026-04-01",
-        "description": "Zerojudge a00 題解。",
-        "tags": ["Zerojudge"]
+        "slug": "c290",
+        "title": "APCS 2017-04 秘密差",
+        "date": "2026-04-04",
+        "description": "c290",
+        "tags": [
+            "Zerojudge",
+            "APCS/IOI"
+        ]
     }
 ]
