@@ -194,7 +194,7 @@ body {
 }
 
 .brand::after {
-    content: '\681E';
+    content: '\6816';
     position: absolute;
     right: -28px;
     top: 50%;
@@ -2090,3 +2090,69 @@ body {
     font-family: Arial, sans-serif;
 }
 
+/* ==========================================================================
+   BACK TO TOP SEAL
+   ========================================================================== */
+
+.back-to-top-wrapper {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(20px);
+    cursor: pointer;
+}
+
+.back-to-top-wrapper.is-visible {
+    opacity: 0.9;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.back-to-top-wrapper:hover {
+    opacity: 1;
+    transform: translateY(-5px);
+}
+
+.back-to-top-seal {
+    width: 60px;
+    height: 60px;
+    border: 3px solid var(--vermillion);
+    border-radius: 50%;
+    background-color: var(--paper-warm);
+    color: transparent; /* Makes inner text transparent so outline works */
+    -webkit-text-stroke: 1.5px var(--vermillion);
+    font-family: var(--font-brand);
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        inset 0 0 0 2px var(--paper-cream), 
+        inset 0 0 0 4px var(--vermillion),
+        0 4px 10px rgba(0,0,0,0.15);
+    
+    /* The continuously rotating animation */
+    animation: rotateSeal 15s linear infinite;
+    transition: all 0.3s ease;
+}
+
+/* Hover state stops rotation and colors the seal fully */
+.back-to-top-wrapper:hover .back-to-top-seal {
+    animation-play-state: paused;
+    color: var(--vermillion);
+    -webkit-text-stroke: 0px;
+    background-color: var(--paper-light);
+    box-shadow: 
+        inset 0 0 0 2px var(--paper-cream), 
+        inset 0 0 0 4px var(--vermillion),
+        0 6px 15px rgba(206, 92, 92, 0.3);
+}
+
+@keyframes rotateSeal {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}

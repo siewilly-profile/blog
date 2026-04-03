@@ -134,4 +134,28 @@ document.addEventListener('DOMContentLoaded', function () {
             closeMenu();
         }
     });
+
+    /* --- Back to Top Seal --- */
+    var bttWrapper = document.createElement('div');
+    bttWrapper.className = 'back-to-top-wrapper';
+    bttWrapper.id = 'backToTop';
+    bttWrapper.setAttribute('aria-label', '回到頂部');
+    bttWrapper.innerHTML = '<div class="back-to-top-seal">栖</div>';
+    
+    document.body.appendChild(bttWrapper);
+
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 300) {
+            bttWrapper.classList.add('is-visible');
+        } else {
+            bttWrapper.classList.remove('is-visible');
+        }
+    });
+
+    bttWrapper.addEventListener('click', function () {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
 });
