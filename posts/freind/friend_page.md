@@ -22,6 +22,14 @@
       <div class="friend-desc">我老大</div>
     </div>
   </a>
+  <!--Xiaochen-->
+  <a href="https://www.xiaochen.tw/" target="_blank" class="friend-card">
+    <img src="../images/XiaoChen.jpg" alt="avatar" class="friend-avatar" onerror="this.src='https://ui-avatars.com/api/?name=燒餅不加蛋&background=random'">
+    <div class="friend-info">
+      <div class="friend-name">Xiaochen</div>
+      <div class="friend-desc">帥潮電神</div>
+    </div>
+  </a>
   <!--台貓-->
   <a href="https://twcat0503.org/" target="_blank" class="friend-card">
     <img src="../images/twcat.jpg" alt="avatar" class="friend-avatar" onerror="this.src='https://ui-avatars.com/api/?name=燒餅不加蛋&background=random'">
@@ -44,6 +52,38 @@
     <div class="friend-info">
       <div class="friend-name">Ummlt Kin</div>
       <div class="friend-desc">Can't live without GNU/Linux</div>
+    </div>
+  </a>
+  <!--鴨鴨-->
+  <a href="https://ya-ya-12.github.io/" target="_blank" class="friend-card">
+    <img src="../images/yaya.jpg" alt="avatar" class="friend-avatar" onerror="this.src='https://ui-avatars.com/api/?name=燒餅不加蛋&background=random'">
+    <div class="friend-info">
+      <div class="friend-name">鴨鴨</div>
+      <div class="friend-desc">我是一個小廢廢</div>
+    </div>
+  </a>
+  <!--qwo-->
+  <a href="https://qwo877.github.io/me/" target="_blank" class="friend-card">
+    <img src="../images/qwo.jpg" alt="avatar" class="friend-avatar" onerror="this.src='https://ui-avatars.com/api/?name=燒餅不加蛋&background=random'">
+    <div class="friend-info">
+      <div class="friend-name">匿名用戶9487</div>
+      <div class="friend-desc">被電爛的廢物</div>
+    </div>
+  </a>
+  <!--su2u4-->
+  <a href="https://github.com/su2u4-1/" target="_blank" class="friend-card">
+    <img src="../images/su2u4.jpg" alt="avatar" class="friend-avatar" onerror="this.src='https://ui-avatars.com/api/?name=燒餅不加蛋&background=random'">
+    <div class="friend-info">
+      <div class="friend-name">su2u4</div>
+      <div class="friend-desc">廢物一個</div>
+    </div>
+  </a>
+  <!--Icrack-->
+  <a href="https://lbc0841.github.io/icrack41-blog/" target="_blank" class="friend-card">
+    <img src="../images/D_avatar.jpg" alt="avatar" class="friend-avatar" onerror="this.src='https://ui-avatars.com/api/?name=燒餅不加蛋&background=random'">
+    <div class="friend-info">
+      <div class="friend-name">Icrack</div>
+      <div class="friend-desc">別再TLE了，我裂開</div>
     </div>
   </a>
   <!-- 燒餅不加蛋 -->
