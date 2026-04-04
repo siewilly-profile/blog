@@ -199,6 +199,7 @@ async function renderBlogMarkdown(slug) {
         }
         html += '<span class="meta-item"><span class="meta-icon">✍</span> ' + wordCount + ' 字</span>';
         html += '<span class="meta-item"><span class="meta-icon">⏳</span> ' + readTime + ' 分鐘</span>';
+        html += '<span class="meta-item"><span class="meta-icon">👁</span> <span id="view-count">載入中...</span></span>';
         html += '</div>';
         if (tags.length > 0) {
             html += '<div class="article-tags">';
@@ -211,8 +212,35 @@ async function renderBlogMarkdown(slug) {
         
         // Render Markdown to HTML 
         html += '<div class="article-body">' + marked.parse(markdownText) + '</div>';
+        html += '<section class="comments-panel" id="comments"></section>';
 
         contentTarget.innerHTML = html;
+
+        if (window.Engagement && typeof window.Engagement.trackPageView === 'function') {
+            window.Engagement.trackPageView({
+                pageKey: '/blog/' + slug,
+                displaySelector: '#view-count'
+            }).then(function (views) {
+                if (views === 0) {
+                    var viewEl = document.getElementById('view-count');
+                    if (viewEl) {
+                        viewEl.textContent = '未啟用';
+                    }
+                }
+            }).catch(function () {
+                var viewEl = document.getElementById('view-count');
+                if (viewEl) {
+                    viewEl.textContent = '讀取失敗';
+                }
+            });
+        }
+
+        if (window.GiscusIntegration && typeof window.GiscusIntegration.mountGiscus === 'function') {
+            window.GiscusIntegration.mountGiscus({
+                containerSelector: '#comments',
+                term: '/blog/' + slug
+            });
+        }
 
     } catch (error) {
         contentTarget.innerHTML = '<div class="error-msg">'

@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
         { text: '题解', sub: 'Solution', href: pagePrefix + 'solution.html', key: 'solution.html' },
         { text: '部落格', sub: 'Blog', href: pagePrefix + 'blog.html', key: 'blog.html' },
         { text: '關於', sub: 'About', href: pagePrefix + 'about.html', key: 'about.html' },
-        { text: '友鏈', sub: 'Friend', href: pagePrefix + 'freind.html', key: 'freind.html' }
+        { text: '友鏈', sub: 'Friend', href: pagePrefix + 'friend.html', key: 'friend.html' }
     ];
 
     var burgerBtn = document.createElement('button');
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
     bttWrapper.className = 'back-to-top-wrapper';
     bttWrapper.id = 'backToTop';
     bttWrapper.setAttribute('aria-label', '回到頂部');
-    bttWrapper.innerHTML = '<div class="back-to-top-seal">栖</div>';
+    bttWrapper.innerHTML = '<span>點我回頂部</span><div class="back-to-top-seal">栖</div>';
     
     document.body.appendChild(bttWrapper);
 
@@ -158,4 +158,22 @@ document.addEventListener('DOMContentLoaded', function () {
             behavior: 'smooth'
         });
     });
+
+    // Load optional integrations lazily to avoid blocking first paint.
+    var engagementPath = isInPages ? '../js/engagement.js' : 'js/engagement.js';
+    var giscusPath = isInPages ? '../js/giscus.js' : 'js/giscus.js';
+    import(engagementPath)
+        .then(function () {
+            if (window.Engagement && typeof window.Engagement.trackPageView === 'function') {
+                window.Engagement.trackPageView();
+            }
+        })
+        .catch(function () {
+            // Keep silent when engagement is not configured yet.
+        });
+
+    import(giscusPath)
+        .catch(function () {
+            // Keep silent when giscus is not configured yet.
+        });
 });

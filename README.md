@@ -1,155 +1,241 @@
-# 南宫有栖 — 古風雅閣部落格
+# 南宫有栖 Blog
 
-一個以古典中國風（古風）為設計主题的純靜態個人部落格。
+以古風視覺為主題的純靜態個人網站，包含首頁、題解、部落格、關於、友鏈五個主要頁面。
 
----
+## 專案現況
 
-## 專案結構
+- 部署型態：GitHub Pages 靜態網站
+- 內容來源：Markdown + 對應的 posts.json 索引
+- 前端技術：HTML + CSS + 原生 JavaScript
+- Markdown 渲染：marked.js（CDN）
 
-```
+## 目錄結構（已整理）
+
+```text
 blog/
-├── pages/              # 網頁頁面
-│   ├── index.html      # 首頁（Home）
-│   ├── solution.html   # 题解入口頁（顯示题解分类：APCS、Zerojudge等）
-│   ├── APCS.html       # APCS 题解列表與文章閱讀頁
-│   ├── Zerojudge.html  # Zerojudge 题解列表與文章閱讀頁
-│   ├── blog.html       # 部落格首頁（支援標籤過濾與搜尋功能）
-│   ├── files.html      # 文檔頁
-│   ├── about.html      # 關於頁
-│   ├── freind.html     # 友鏈頁
-│   └── home.html       # 備用首頁
-│
-├── styles/
-│   └── style.css       # 全站樣式表（古風設計系統）
-│
-├── js/
-│   ├── solution-page.js# 分类题解頁核心邏輯（共用邏輯：讀取標籤動態載入分类）
-│   ├── blog.js         # 部落格專屬核心邏輯（支援動態標籤雲與搜尋功能）
-│   ├── script.js       # 舊题解頁邏輯（保留備用）
-│   └── petal.js        # 花瓣飄落動畫效果
-│
-├── posts/
-│   └── solution/       # 题解 Markdown 文章根目錄
-│       ├── APCS/       # APCS 文章目錄
-│       │   ├── posts.json
-│       │   └── APCS_1.md
-│       ├── Zerojudge/  # Zerojudge 文章目錄
-│       │   ├── posts.json
-│       │   └── a00.md
-│       └── ...         # 其他舊的測試文章
-│   └── blog/           # 部落格 Markdown 文章根目錄
-│       ├── posts.json  # 部落格文章索引（標籤與標题等過濾來源）
-│       └── s1.md       # 部落格範例文章
-│
-└── README.md           # 本檔案
+├─ CNAME
+├─ index.html
+├─ README.md
+├─ images/
+├─ styles/
+│  ├─ style.css
+│  └─ home.css
+├─ js/
+│  ├─ about.js
+│  ├─ blog.js
+│  ├─ burger.js
+│  ├─ engagement-config.js
+│  ├─ engagement.js
+│  ├─ giscus-config.js
+│  ├─ giscus.js
+│  ├─ friend.js
+│  ├─ home.js
+│  ├─ petal.js
+│  ├─ solution-page.js
+│  ├─ transition.js
+│  └─ legacy/
+│     └─ script.js
+├─ pages/
+│  ├─ index.html
+│  ├─ solution.html
+│  ├─ APCS.html
+│  ├─ Zerojudge.html
+│  ├─ blog.html
+│  ├─ about.html
+│  └─ friend.html
+└─ posts/
+    ├─ about/
+    │  └─ about.md
+    ├─ blog/
+    │  ├─ posts.json
+    │  ├─ s1.md
+    │  └─ s2.md
+    ├─ friend/
+    │  └─ friend_page.md
+    └─ solution/
+        ├─ posts.json
+        ├─ APCS/
+        │  ├─ posts.json
+        │  └─ APCS_2026_03.md
+        └─ Zerojudge/
+            ├─ posts.json
+            └─ c290.md
 ```
 
----
+## 命名與路徑規範
 
-## 各檔案功用說明
+- 友鏈頁面統一使用 friend 命名：
+  - pages/friend.html
+  - js/friend.js
+  - posts/friend/friend_page.md
+- 新增頁面/腳本時，檔名使用小寫英文與連字號（例如 example-page.html）。
+- 正式使用的程式碼放在 js/ 根目錄；淘汰或備援腳本放在 js/legacy/。
 
-### 📄 HTML 頁面 (`pages/`)
+## 各模組說明
 
-| 檔案 | 功用 |
-|------|------|
-| `index.html` | 網站首頁，包含古風導航欄 |
-| `solution.html` | 题解入口頁，提供以题庫分类（APCS、Zerojudge 等）的精美卡片導覽 |
-| `APCS.html` | APCS 專屬题解頁，動態讀取 `/posts/solution/APCS` 內的文章列表與內容 |
-| `Zerojudge.html` | Zerojudge 專屬题解頁，動態讀取 `/posts/solution/Zerojudge` 內的文章 |
-| `blog.html` | 部落格專用頁面，雙欄式佈局，左側提供關鍵字搜尋與標籤雲（Tags Cloud），讀取 `/posts/blog` 內的內容 |
-| `files.html` | 文檔歸檔頁（待開發） |
-| `about.html` | 關於我頁面（待開發） |
-| `freind.html` | 友情鏈接頁面（待開發） |
-| `home.html` | 備用首頁（含 hello world 測試內容） |
+### pages/
 
-### 🎨 樣式 (`styles/`)
+- index.html：首頁（pages 版本）
+- solution.html：題解分類入口
+- APCS.html：APCS 題解列表與內文頁
+- Zerojudge.html：Zerojudge 題解列表與內文頁
+- blog.html：部落格列表與內文頁（含搜尋與標籤）
+- about.html：關於頁
+- friend.html：友鏈頁
 
-| 檔案 | 功用 |
-|------|------|
-| `style.css` | 全站唯一的 CSS 檔案，包含：古風配色令牌（硃紅、古金、宣紙色等）、導航欄樣式、回紋裝飾、品牌印章效果、花瓣動畫、文章卡片列表樣式、文章內文排版、程式碼區塊、響應式設計、滾動條美化 |
+### js/
 
-### ⚙️ JavaScript (`js/`)
+- solution-page.js：APCS/Zerojudge 共用題解列表與文章渲染
+- blog.js：部落格列表、文章、搜尋、標籤
+- about.js：about.md 載入與渲染
+- friend.js：friend_page.md 載入與渲染
+- engagement-config.js：瀏覽次數系統設定（Firebase）
+- engagement.js：瀏覽次數共用邏輯
+- giscus-config.js：giscus 留言設定
+- giscus.js：giscus 留言掛載邏輯
+- burger.js：行動版導覽選單
+- transition.js：頁面轉場
+- home.js：首頁互動
+- petal.js：花瓣動畫
+- legacy/script.js：舊版題解邏輯（目前未掛載）
 
-| 檔案 | 功用 |
-|------|------|
-| `solution-page.js` | 分类题解頁的核心邏輯。設計為共用模組，透過對應 HTML 中 `#solution-category` 的 `data-category` 參數，動態從不同子目錄載入文章列表或對應 Markdown 文章 |
-| `blog.js` | 部落格頁面的核心腳本。動態載入左側「搜尋欄」與「標籤雲」，並負責文章關鍵字搜尋與關聯標籤的過濾功能 |
-| `script.js` | 舊版統一文章列表邏輯（保留作其他用途） |
-| `petal.js` | 花瓣飄落動畫。每 1.5 秒隨機產生 🌸🍂🍃 花瓣，從畫面頂部飄落，12 秒後自動移除 |
+### posts/
 
-### 📝 文章 (`posts/`)
+- posts/blog/posts.json：部落格文章索引
+- posts/solution/APCS/posts.json：APCS 文章索引
+- posts/solution/Zerojudge/posts.json：Zerojudge 文章索引
+- posts/solution/posts.json：舊版索引（保留，不影響現行頁面）
 
-| 檔案 | 功用 |
-|------|------|
-| `*/posts.json` | 該分类（如 `solution/APCS/` 或 `blog/`）的**文章索引清單**。新增文章時必須編輯此檔案 |
-| `*/*.md` | 對應板塊的 Markdown 文章內容 |
+## 文章資料格式
 
----
-
-## 如何新增一篇题解文章
-
-### 步驟 1：建立 Markdown 檔案
-
-在你想新增题目的分类資料夾中（例如 `posts/solution/APCS/`）建立 `.md` 檔案，例如 `APCS_1.md`：
-
-```markdown
-# APCS 第一题
-
-## 题目描述
-...
-
-## 解题思路
-...
-```
-
-### 步驟 2：更新對應分类的 posts.json
-
-在你要新增文章的分类資料夾中（例如 `posts/solution/APCS/posts.json` 或 `posts/blog/posts.json`）新增一筆記錄：
+所有文章索引都使用同一格式：
 
 ```json
 [
-    {
-        "slug": "APCS_1",
-        "title": "APCS 第一题",
-        "date": "2026-04-01",
-        "description": "APCS 第一题题解。",
-        "tags": ["APCS"]
-    }
+  {
+     "slug": "example-post",
+     "title": "文章標題",
+     "date": "2026-04-04",
+     "description": "文章摘要",
+     "tags": ["tag1", "tag2"]
+  }
 ]
 ```
 
-**欄位說明：**
+欄位說明：
 
-| 欄位 | 必填 | 說明 |
-|------|:----:|------|
-| `slug` | ✅ | `.md` 檔案名稱（不含 `.md` 副檔名） |
-| `title` | ✅ | 文章標题，顯示在卡片和文章頁 |
-| `date` | ✅ | 發布日期，格式 `YYYY-MM-DD` |
-| `description` | ❌ | 文章摘要，顯示在卡片上 |
-| `tags` | ❌ | 標籤陣列，顯示為小圓角標籤 |
+- slug：Markdown 檔名（不含 .md），必填
+- title：標題，必填
+- date：日期，格式 YYYY-MM-DD，必填
+- description：摘要，選填
+- tags：標籤陣列，選填
 
-### 步驟 3：完成！
+## 新增內容流程
 
-訪問相關的分类頁面（例如 `APCS.html`）即可看到新文章出現在列表中。
-點擊卡片即可進入閱讀（例如 `APCS.html?post=APCS_1`）。
+### 新增一篇部落格文章
 
----
+1. 在 posts/blog/ 新增 slug.md。
+2. 在 posts/blog/posts.json 新增一筆對應資料。
+3. 進入 pages/blog.html 確認列表與文章可正常顯示。
 
-## 使用的外部資源
+### 新增一篇題解（APCS 或 Zerojudge）
 
-| 資源 | 用途 |
-|------|------|
-| [Google Fonts](https://fonts.google.com/) | 馬山正楷(Ma Shan Zheng)、站酷小薇(ZCOOL XiaoWei)、思源宋體(Noto Serif TC) |
-| [marked.js](https://cdn.jsdelivr.net/npm/marked/marked.min.js) | 客戶端 Markdown → HTML 渲染引擎 |
+1. 在對應分類資料夾新增 Markdown：
+    - posts/solution/APCS/
+    - posts/solution/Zerojudge/
+2. 更新該分類的 posts.json。
+3. 進入對應頁面驗證：
+    - pages/APCS.html
+    - pages/Zerojudge.html
 
----
+### 更新友鏈
+
+1. 編輯 posts/friend/friend_page.md。
+2. 進入 pages/friend.html 檢查卡片渲染與圖片路徑。
 
 ## 本地開發
 
-可使用任意靜態伺服器預覽，例如：
+可用任意靜態伺服器預覽，範例：
 
 ```bash
 npx http-server . -p 8080 --cors -c-1
 ```
 
-然後在瀏覽器打開 `http://localhost:8080/pages/index.html`
+建議測試入口：
+
+- http://localhost:8080/
+- http://localhost:8080/pages/index.html
+
+## 留言系統（giscus）
+
+專案目前使用 giscus 作為留言系統（GitHub Discussions 驅動）。
+
+### 1. 啟用 GitHub Discussions
+
+1. 到你的 GitHub repo：Settings -> General。
+2. 啟用 Discussions。
+
+### 2. 在 giscus 產生設定
+
+1. 打開 https://giscus.app/。
+2. 選你的 repo 與分類（category）。
+3. 取得這些值：
+   - repo
+   - repoId
+   - category
+   - categoryId
+
+### 3. 填入本專案設定
+
+編輯 js/giscus-config.js：
+
+- 將 enabled 改成 true
+- 填入 repo / repoId / category / categoryId
+
+### 4. 目前掛載位置
+
+- 部落格文章留言：js/blog.js
+- 題解文章留言：js/solution-page.js
+- 友鏈頁留言：js/friend.js
+
+## 瀏覽次數系統（Firebase，可選）
+
+瀏覽次數獨立使用 Firebase Firestore；若未設定，頁面會顯示「未啟用」。
+
+### 1. 建立 Firebase 專案
+
+1. 到 Firebase Console 建立專案。
+2. 啟用 Firestore Database（Native mode）。
+3. 在 Project settings 建立 Web App，取得 config。
+
+### 2. 填入設定
+
+編輯 js/engagement-config.js：
+
+- 將 enabled 改成 true
+- 填入 firebase 欄位
+
+### 3. Firestore 安全規則（瀏覽數最小可用版）
+
+```text
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /pages/{pageId} {
+      allow read: if true;
+      allow create, update: if true;
+    }
+  }
+}
+```
+
+### 4. 目前掛載位置
+
+- 全站瀏覽次數記錄：js/burger.js 會載入 js/engagement.js
+- 文章瀏覽數顯示：js/blog.js、js/solution-page.js
+
+## 維護建議
+
+- 每次新增文章只改兩處：Markdown + 對應 posts.json。
+- 若搬動檔案，務必同步更新 HTML 的 script/src 與 JS 的 fetch 路徑。
+- legacy 資料夾中的檔案不應再被新頁面引用。

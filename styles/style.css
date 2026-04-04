@@ -2066,12 +2066,22 @@ body {
     position: fixed;
     bottom: 30px;
     right: 30px;
+    height: 60px; /* Matches the seal height */
+    padding: 0 5px 0 15px; /* Extra padding on left for the text */
+    background-color: var(--paper-light, #fdf8e6);
+    border: 2px solid var(--vermillion, #CE5C5C);
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 999;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     transform: translateY(20px);
     cursor: pointer;
+    box-sizing: border-box;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .back-to-top-wrapper.is-visible {
@@ -2083,46 +2093,167 @@ body {
 .back-to-top-wrapper:hover {
     opacity: 1;
     transform: translateY(-5px);
+    background-color: var(--vermillion, #CE5C5C);
+    border-color: var(--vermillion, #CE5C5C);
+    box-shadow: 0 8px 20px rgba(206, 92, 92, 0.3);
+}
+
+.back-to-top-wrapper span {
+    max-width: 0;
+    opacity: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    color: var(--paper-warm, #faf0e6);
+    font-family: var(--font-brand, 'LXGW WenKai TC', serif);
+    font-size: 16px;
+    transition: max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, margin-right 0.4s ease;
+}
+
+.back-to-top-wrapper:hover span {
+    max-width: 120px;
+    opacity: 1;
+    margin-right: 10px;
 }
 
 .back-to-top-seal {
-    width: 60px;
-    height: 60px;
-    border: 3px solid var(--vermillion);
+    width: 50px; /* Slightly smaller to fit nicely in the wrapper */
+    height: 50px;
+    border: 2px solid var(--vermillion);
     border-radius: 50%;
     background-color: var(--paper-warm);
-    color: transparent; /* Makes inner text transparent so outline works */
-    -webkit-text-stroke: 1.5px var(--vermillion);
+    color: transparent;
+    -webkit-text-stroke: 1.2px var(--vermillion);
     font-family: var(--font-brand);
-    font-size: 32px;
+    font-size: 26px;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 
-        inset 0 0 0 2px var(--paper-cream), 
-        inset 0 0 0 4px var(--vermillion),
-        0 4px 10px rgba(0,0,0,0.15);
+        inset 0 0 0 1px var(--paper-cream), 
+        inset 0 0 0 3px var(--vermillion);
     
-    /* The continuously rotating animation */
     animation: rotateSeal 15s linear infinite;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
 }
 
-/* Hover state stops rotation and colors the seal fully */
 .back-to-top-wrapper:hover .back-to-top-seal {
     animation-play-state: paused;
     color: var(--vermillion);
     -webkit-text-stroke: 0px;
     background-color: var(--paper-light);
+    border-color: transparent;
     box-shadow: 
-        inset 0 0 0 2px var(--paper-cream), 
-        inset 0 0 0 4px var(--vermillion),
-        0 6px 15px rgba(206, 92, 92, 0.3);
+        inset 0 0 0 1px var(--paper-warm), 
+        inset 0 0 0 3px var(--vermillion);
 }
 
 @keyframes rotateSeal {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
+}
+
+/* ======================================================================
+   Comments Panel
+   ====================================================================== */
+
+.comments-panel {
+    margin-top: 2.2rem;
+}
+
+.comments-card {
+    border: 1px solid var(--line-soft, rgba(0, 0, 0, 0.12));
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(2px);
+    padding: 1rem;
+}
+
+.comments-title {
+    margin: 0 0 0.85rem;
+    font-size: 1.15rem;
+    color: var(--ink-dark);
+}
+
+.comment-form {
+    display: grid;
+    gap: 0.65rem;
+    margin-bottom: 0.9rem;
+}
+
+.comment-form input,
+.comment-form textarea {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--ink-dark);
+    font: inherit;
+    padding: 0.65rem 0.75rem;
+    box-sizing: border-box;
+}
+
+.comment-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.comment-form button {
+    justify-self: end;
+    border: none;
+    border-radius: 999px;
+    padding: 0.5rem 1rem;
+    background: var(--vermillion);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.comment-form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.comments-loading,
+.comments-empty {
+    margin: 0.4rem 0;
+    color: var(--ink-light);
+}
+
+.comments-list {
+    display: grid;
+    gap: 0.6rem;
+}
+
+.comment-item {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 0.65rem 0.75rem;
+    background: rgba(255, 255, 255, 0.85);
+}
+
+.comment-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.25rem;
+    font-size: 0.85rem;
+    color: var(--ink-light);
+}
+
+.comment-author {
+    font-weight: 700;
+    color: var(--ink-dark);
+}
+
+.comment-content {
+    margin: 0;
+    line-height: 1.65;
+}
+
+.giscus-hint p {
+    margin: 0;
+    color: var(--ink-light);
 }
 
 /* ==========================================================================
