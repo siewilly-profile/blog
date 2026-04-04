@@ -462,6 +462,56 @@ body {
     gap: 20px;
 }
 
+.pagination {
+    margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pagination-link {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--ink-medium);
+    background: var(--paper-light);
+    border: 1px solid rgba(184, 134, 11, 0.25);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-family: var(--font-nav);
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: all 0.25s ease;
+}
+
+.pagination-link:hover {
+    color: var(--vermillion);
+    border-color: rgba(194, 58, 43, 0.35);
+    transform: translateY(-1px);
+}
+
+.pagination-link.page-number {
+    min-width: 38px;
+    text-align: center;
+    padding: 6px 0;
+}
+
+.pagination-link.active {
+    color: var(--paper-light);
+    background: linear-gradient(90deg, var(--vermillion), var(--vermillion-light));
+    border-color: transparent;
+    box-shadow: 0 4px 10px rgba(194, 58, 43, 0.2);
+    pointer-events: none;
+}
+
+.pagination-ellipsis {
+    color: var(--ink-light);
+    padding: 0 2px;
+    letter-spacing: 2px;
+    font-family: var(--font-nav);
+}
+
 .post-card {
     display: flex;
     text-decoration: none;
@@ -1055,6 +1105,19 @@ body {
 
     .post-card-title {
         font-size: 18px;
+    }
+
+    .pagination {
+        gap: 8px;
+    }
+
+    .pagination-link {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+
+    .pagination-link.page-number {
+        min-width: 34px;
     }
 
     .article-title {

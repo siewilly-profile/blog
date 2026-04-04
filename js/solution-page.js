@@ -2,6 +2,12 @@ var params = new URLSearchParams(window.location.search);
 var postName = params.get('post');
 var currentTag = params.get('tag');
 var searchQuery = params.get('q');
+var currentPage = parseInt(params.get('page') || '1', 10);
+var POSTS_PER_PAGE = 5;
+
+if (isNaN(currentPage) || currentPage < 1) {
+    currentPage = 1;
+}
 
 var categoryEl = document.getElementById('solution-category');
 var category = categoryEl ? categoryEl.getAttribute('data-category') : '';
@@ -225,14 +231,19 @@ async function renderPostList() {
     }
     html += '</div>';
 
+    var totalPages = Math.max(1, Math.ceil(filteredPosts.length / POSTS_PER_PAGE));
+    var safePage = Math.min(currentPage, totalPages);
+    var startIndex = (safePage - 1) * POSTS_PER_PAGE;
+    var pagedPosts = filteredPosts.slice(startIndex, startIndex + POSTS_PER_PAGE);
+
     html += '<div class="post-list">';
 
     if (filteredPosts.length === 0) {
         html += '<div class="error-msg"><p>找不到符合條件的文章。</p></div>';
     }
 
-    for (var i = 0; i < filteredPosts.length; i++) {
-        var post = filteredPosts[i];
+    for (var i = 0; i < pagedPosts.length; i++) {
+        var post = pagedPosts[i];
         var tags = post.tags || [];
 
         html += '<a href="' + pageName + '?post=' + post.slug + '" class="post-card" id="post-' + post.slug + '">';
@@ -259,5 +270,85 @@ async function renderPostList() {
     }
 
     html += '</div>';
+    html += renderPagination(totalPages, safePage, pageName);
     target.innerHTML = html;
+}
+
+function renderPagination(totalPages, activePage, pageName) {
+    if (totalPages <= 1) {
+        return '';
+    }
+
+    var pageNumbers = getVisiblePageNumbers(totalPages, activePage, 2);
+    var html = '<nav class="pagination" aria-label="文章分頁">';
+
+    if (activePage > 1) {
+        html += '<a class="pagination-link prev" href="' + buildPageUrl(pageName, activePage - 1) + '">← 上一頁</a>';
+    }
+
+    for (var i = 0; i < pageNumbers.length; i++) {
+        if (pageNumbers[i] === '...') {
+            html += '<span class="pagination-ellipsis">...</span>';
+            continue;
+        }
+
+        var page = pageNumbers[i];
+        var activeClass = page === activePage ? ' active' : '';
+        html += '<a class="pagination-link page-number' + activeClass + '" href="' + buildPageUrl(pageName, page) + '">' + page + '</a>';
+    }
+
+    if (activePage < totalPages) {
+        html += '<a class="pagination-link next" href="' + buildPageUrl(pageName, activePage + 1) + '">下一頁 →</a>';
+    }
+
+    html += '</nav>';
+    return html;
+}
+
+function getVisiblePageNumbers(totalPages, activePage, siblingCount) {
+    var numbers = [];
+    var start = Math.max(2, activePage - siblingCount);
+    var end = Math.min(totalPages - 1, activePage + siblingCount);
+
+    numbers.push(1);
+
+    if (start > 2) {
+        numbers.push('...');
+    }
+
+    for (var i = start; i <= end; i++) {
+        numbers.push(i);
+    }
+
+    if (end < totalPages - 1) {
+        numbers.push('...');
+    }
+
+    if (totalPages > 1) {
+        numbers.push(totalPages);
+    }
+
+    return numbers;
+}
+
+function buildPageUrl(pageName, page) {
+    var queryParts = [];
+
+    if (searchQuery) {
+        queryParts.push('q=' + encodeURIComponent(searchQuery));
+    }
+
+    if (currentTag) {
+        queryParts.push('tag=' + encodeURIComponent(currentTag));
+    }
+
+    if (page > 1) {
+        queryParts.push('page=' + page);
+    }
+
+    if (queryParts.length === 0) {
+        return pageName;
+    }
+
+    return pageName + '?' + queryParts.join('&');
 }
