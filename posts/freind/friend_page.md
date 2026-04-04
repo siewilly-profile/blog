@@ -1,7 +1,7 @@
 # 本站資訊
 - 站名:南宫有栖 blog
 - 站長:南宫有栖
-- 網址:https://new-blog.siewilly.me
+- 網址:https://blog.siewilly.me/
 
 # 申請友鍊方法
 ```yml
@@ -20,6 +20,14 @@
     <div class="friend-info">
       <div class="friend-name">南宫柳信</div>
       <div class="friend-desc">我老大</div>
+    </div>
+  </a>
+  <!--小Z-->
+  <a href="https://www.yuzen.dev" target="_blank" class="friend-card">
+    <img src="../images/smallZ.jpg" alt="avatar" class="friend-avatar" onerror="this.src='https://ui-avatars.com/api/?name=燒餅不加蛋&background=random'">
+    <div class="friend-info">
+      <div class="friend-name">Small Z</div>
+      <div class="friend-desc">我是廢物</div>
     </div>
   </a>
   <!--Xiaochen-->
