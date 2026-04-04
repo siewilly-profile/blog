@@ -218,7 +218,6 @@ async function renderBlogMarkdown(slug) {
 
         if (window.Engagement && typeof window.Engagement.trackPageView === 'function') {
             window.Engagement.trackPageView({
-                pageKey: '/blog/' + slug,
                 displaySelector: '#view-count'
             }).then(function (views) {
                 if (views === 0) {

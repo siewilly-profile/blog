@@ -89,8 +89,8 @@ blog/
 - blog.js：部落格列表、文章、搜尋、標籤
 - about.js：about.md 載入與渲染
 - friend.js：friend_page.md 載入與渲染
-- engagement-config.js：瀏覽次數系統設定（Firebase）
-- engagement.js：瀏覽次數共用邏輯
+- engagement-config.js：瀏覽次數系統設定（GoatCounter）
+- engagement.js：瀏覽次數共用邏輯（GoatCounter）
 - giscus-config.js：giscus 留言設定
 - giscus.js：giscus 留言掛載邏輯
 - burger.js：行動版導覽選單
@@ -198,41 +198,35 @@ npx http-server . -p 8080 --cors -c-1
 - 題解文章留言：js/solution-page.js
 - 友鏈頁留言：js/friend.js
 
-## 瀏覽次數系統（Firebase，可選）
+## 瀏覽次數系統（GoatCounter）
 
-瀏覽次數獨立使用 Firebase Firestore；若未設定，頁面會顯示「未啟用」。
+瀏覽次數改用 GoatCounter，不需要 Firebase。
 
-### 1. 建立 Firebase 專案
+### 1. 建立 GoatCounter 站點
 
-1. 到 Firebase Console 建立專案。
-2. 啟用 Firestore Database（Native mode）。
-3. 在 Project settings 建立 Web App，取得 config。
+1. 到 https://www.goatcounter.com/ 註冊登入。
+2. 建立一個站點，取得你的 code（例如 myblog）。
+3. 你的 endpoint 會是：
+   - https://myblog.goatcounter.com/count
 
 ### 2. 填入設定
 
 編輯 js/engagement-config.js：
 
 - 將 enabled 改成 true
-- 填入 firebase 欄位
+- 將 endpoint 改成你的 GoatCounter endpoint
+- 保持 scriptSrc 為 https://gc.zgo.at/count.js
 
-### 3. Firestore 安全規則（瀏覽數最小可用版）
+### 3. 計數方式
 
-```text
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /pages/{pageId} {
-      allow read: if true;
-      allow create, update: if true;
-    }
-  }
-}
-```
+- 同一瀏覽器、同一頁面會依 viewThrottleMinutes（預設 30 分鐘）做節流
+- 文章頁的「👁」欄位會顯示「已記錄」
+- 詳細流量統計請在 GoatCounter dashboard 查看
 
 ### 4. 目前掛載位置
 
 - 全站瀏覽次數記錄：js/burger.js 會載入 js/engagement.js
-- 文章瀏覽數顯示：js/blog.js、js/solution-page.js
+- 文章瀏覽數狀態顯示：js/blog.js、js/solution-page.js
 
 ## 維護建議
 

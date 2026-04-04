@@ -1,24 +1,9 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-import {
-    getFirestore,
-    doc,
-    getDoc,
-    runTransaction,
-    increment,
-    serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 import { ENGAGEMENT_CONFIG } from "./engagement-config.js";
 
-var app = null;
-var db = null;
+var loaderPromise = null;
 
 function isEnabled() {
     return ENGAGEMENT_CONFIG && ENGAGEMENT_CONFIG.enabled === true;
-}
-
-function toPageId(pageKey) {
-    var encoded = encodeURIComponent(pageKey);
-    return encoded.length > 1200 ? encoded.slice(0, 1200) : encoded;
 }
 
 function getPageKey(defaultKey) {
@@ -55,67 +40,79 @@ function shouldCountView(pageId, minutes) {
     }
 }
 
-function ensureFirebase() {
+function ensureGoatCounter() {
     if (!isEnabled()) {
-        return false;
+        return Promise.resolve(false);
     }
 
-    if (!app) {
-        app = initializeApp(ENGAGEMENT_CONFIG.firebase);
-        db = getFirestore(app);
+    if (window.goatcounter && typeof window.goatcounter.count === "function") {
+        return Promise.resolve(true);
     }
-    return true;
+
+    if (loaderPromise) {
+        return loaderPromise;
+    }
+
+    loaderPromise = new Promise(function (resolve, reject) {
+        var endpoint = ENGAGEMENT_CONFIG.endpoint || "";
+        var scriptSrc = ENGAGEMENT_CONFIG.scriptSrc || "https://gc.zgo.at/count.js";
+
+        if (!endpoint) {
+            resolve(false);
+            return;
+        }
+
+        var existing = document.querySelector('script[data-goatcounter]');
+        if (existing) {
+            resolve(true);
+            return;
+        }
+
+        // Disable automatic onload count; we count manually with throttling.
+        window.goatcounter = window.goatcounter || {};
+        window.goatcounter.no_onload = true;
+
+        var script = document.createElement("script");
+        script.async = true;
+        script.src = scriptSrc;
+        script.setAttribute("data-goatcounter", endpoint);
+        script.addEventListener("load", function () { resolve(true); });
+        script.addEventListener("error", function () { reject(new Error("Failed to load GoatCounter")); });
+        document.head.appendChild(script);
+    });
+
+    return loaderPromise;
 }
 
-async function readViews(pageId) {
-    var pageRef = doc(db, "pages", pageId);
-    var snap = await getDoc(pageRef);
-    if (!snap.exists()) return 0;
-    var data = snap.data();
-    return data.views || 0;
-}
-
-function setViewText(selector, views) {
+function setViewText(selector, text) {
     if (!selector) return;
     var el = document.querySelector(selector);
     if (!el) return;
-    el.textContent = "瀏覽 " + views;
+    el.textContent = text;
 }
 
 async function trackPageView(options) {
     var opts = options || {};
-    if (!ensureFirebase()) {
+    if (!isEnabled()) {
+        setViewText(opts.displaySelector, "未啟用");
         return 0;
     }
 
     var pageKey = getPageKey(opts.pageKey);
-    var pageId = toPageId(pageKey);
+    var pageId = encodeURIComponent(pageKey).slice(0, 1200);
     var throttleMinutes = opts.throttleMinutes || ENGAGEMENT_CONFIG.viewThrottleMinutes || 30;
-    var pageRef = doc(db, "pages", pageId);
 
-    if (shouldCountView(pageId, throttleMinutes)) {
-        await runTransaction(db, async function (tx) {
-            var snap = await tx.get(pageRef);
-            if (!snap.exists()) {
-                tx.set(pageRef, {
-                    pageKey: pageKey,
-                    views: 1,
-                    createdAt: serverTimestamp(),
-                    updatedAt: serverTimestamp()
-                });
-                return;
-            }
+    await ensureGoatCounter();
 
-            tx.update(pageRef, {
-                views: increment(1),
-                updatedAt: serverTimestamp()
-            });
+    if (shouldCountView(pageId, throttleMinutes) && window.goatcounter && typeof window.goatcounter.count === "function") {
+        window.goatcounter.count({
+            path: pageKey,
+            title: document.title
         });
     }
 
-    var views = await readViews(pageId);
-    setViewText(opts.displaySelector, views);
-    return views;
+    setViewText(opts.displaySelector, "已記錄");
+    return 1;
 }
 
 window.Engagement = {
