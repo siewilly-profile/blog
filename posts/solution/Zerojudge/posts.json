@@ -8,5 +8,35 @@
             "Zerojudge",
             "APCS/IOI"
         ]
+    },
+    {
+        "slug":"b964",
+        "title":"b964",
+        "date":"2026-04-04",
+        "description":"1. 成績指標",
+        "tags":[
+            "Zerojudge",
+            "APCS/IOI"
+        ]
+    },
+    {
+        "slug":"b965",
+        "title":"b965",
+        "date":"2026-04-04",
+        "description":"2.矩陣翻轉",
+        "tags":[
+            "Zerojudge",
+            "APCS/IOI"
+        ]
+    },
+    {
+        "slug":"b966",
+        "title":"b966",
+        "date":"2026-04-04",
+        "description":"3. 線段覆蓋長度",
+        "tags":[
+            "Zerojudge",
+            "APCS/IOI"
+        ]
     }
 ]
