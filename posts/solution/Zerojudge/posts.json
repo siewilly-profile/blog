@@ -58,5 +58,15 @@
             "Zerojudge",
             "APCS/IOI"
         ]
+    },
+    {
+        "slug":"e313",
+        "title":"e313",
+        "date":"2026-04-07",
+        "description":"最少相異字母",
+        "tags":[
+            "Zerojudge",
+            "APCS/IOI"
+        ]
     }
 ]
