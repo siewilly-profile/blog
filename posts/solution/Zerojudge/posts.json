@@ -38,5 +38,15 @@
             "Zerojudge",
             "APCS/IOI"
         ]
+    },
+    {
+        "slug":"b967",
+        "title":"b967",
+        "date":"2026-04-07",
+        "description":"4. 血緣關係",
+        "tags":[
+            "Zerojudge",
+            "APCS/IOI"
+        ]
     }
 ]
