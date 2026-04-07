@@ -48,5 +48,15 @@
             "Zerojudge",
             "APCS/IOI"
         ]
+    },
+    {
+        "slug":"e288",
+        "title":"e288",
+        "date":"2026-04-07",
+        "description":"互補團隊",
+        "tags":[
+            "Zerojudge",
+            "APCS/IOI"
+        ]
     }
 ]
