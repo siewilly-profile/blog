@@ -2129,8 +2129,8 @@ body {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    height: 60px; /* Matches the seal height */
-    padding: 0 5px 0 15px; /* Extra padding on left for the text */
+    height: 60px; 
+    padding: 0 5px 0 15px;
     background-color: var(--paper-light, #fdf8e6);
     border: 2px solid var(--vermillion, #CE5C5C);
     border-radius: 30px;
@@ -2179,7 +2179,7 @@ body {
 }
 
 .back-to-top-seal {
-    width: 50px; /* Slightly smaller to fit nicely in the wrapper */
+    width: 50px; 
     height: 50px;
     border: 2px solid var(--vermillion);
     border-radius: 50%;
@@ -2216,9 +2216,6 @@ body {
     to { transform: rotate(360deg); }
 }
 
-/* ======================================================================
-   Comments Panel
-   ====================================================================== */
 
 .comments-panel {
     margin-top: 2.2rem;
