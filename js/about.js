@@ -11,11 +11,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 return response.text();
             })
             .then(text => {
-                marked.setOptions({
-                    breaks: true,
-                    gfm: true
-                });
-                aboutContainer.innerHTML = marked.parse(text);
+                if (window.MarkdownRenderer && typeof window.MarkdownRenderer.renderInto === 'function') {
+                    window.MarkdownRenderer.renderInto(aboutContainer, text);
+                } else {
+                    marked.setOptions({
+                        breaks: true,
+                        gfm: true
+                    });
+                    aboutContainer.innerHTML = marked.parse(text);
+                }
             })
             .catch(error => {
                 console.error('Error loading about.md:', error);

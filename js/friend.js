@@ -44,10 +44,17 @@ async function renderFriendMarkdown() {
         html += '</div>';
 
         // Render Markdown to HTML 
-        html += '<div class="article-body">' + marked.parse(markdownText) + '</div>';
+        var articleHtml = window.MarkdownRenderer && typeof window.MarkdownRenderer.parse === 'function'
+            ? window.MarkdownRenderer.parse(markdownText)
+            : marked.parse(markdownText);
+        html += '<div class="article-body">' + articleHtml + '</div>';
         html += '<section class="comments-panel" id="comments"></section>';
 
         contentTarget.innerHTML = html;
+        var articleBodyEl = contentTarget.querySelector('.article-body');
+        if (window.MarkdownRenderer && typeof window.MarkdownRenderer.enhance === 'function') {
+            window.MarkdownRenderer.enhance(articleBodyEl);
+        }
         mountFriendComments();
 
     } catch (error) {

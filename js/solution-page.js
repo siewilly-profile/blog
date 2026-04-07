@@ -144,10 +144,18 @@ async function renderMarkdown(slug) {
             html += '</div>';
         }
         html += '</div>';
-        html += '<div class="article-body">' + marked.parse(markdownText) + '</div>';
+        var articleHtml = window.MarkdownRenderer && typeof window.MarkdownRenderer.parse === 'function'
+            ? window.MarkdownRenderer.parse(markdownText)
+            : marked.parse(markdownText);
+        html += '<div class="article-body">' + articleHtml + '</div>';
         html += '<section class="comments-panel" id="comments"></section>';
 
         target.innerHTML = html;
+
+        var articleBodyEl = target.querySelector('.article-body');
+        if (window.MarkdownRenderer && typeof window.MarkdownRenderer.enhance === 'function') {
+            window.MarkdownRenderer.enhance(articleBodyEl);
+        }
 
         if (window.Engagement && typeof window.Engagement.trackPageView === 'function') {
             window.Engagement.trackPageView({

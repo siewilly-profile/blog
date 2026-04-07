@@ -767,6 +767,12 @@ body {
     margin-bottom: 6px;
 }
 
+.article-body .katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 4px 0;
+}
+
 ::-webkit-scrollbar {
     width: 8px;
 }
