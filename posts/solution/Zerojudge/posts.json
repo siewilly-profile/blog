@@ -62,8 +62,18 @@
     {
         "slug":"e313",
         "title":"e313",
-        "date":"2026-04-07",
+        "date":"2026-04-08",
         "description":"最少相異字母",
+        "tags":[
+            "Zerojudge",
+            "APCS/IOI"
+        ]
+    },
+    {
+        "slug":"f163",
+        "title":"f163",
+        "date":"2026-04-09",
+        "description":"f163. 貨物分配",
         "tags":[
             "Zerojudge",
             "APCS/IOI"
