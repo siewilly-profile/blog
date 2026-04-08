@@ -30,6 +30,14 @@
       <div class="friend-desc">我是廢物</div>
     </div>
   </a>
+  <!--優格-->
+  <a href="https://youcheng0617.github.io/aboutMeee/" target="_blank" class="friend-card">
+    <img src="../images/Yougat_avatar.jpg" alt="avatar" class="friend-avatar" onerror="this.src='https://ui-avatars.com/api/?name=燒餅不加蛋&background=random'">
+    <div class="friend-info">
+      <div class="friend-name">Yogurt/ゆず</div>
+      <div class="friend-desc"></div>
+    </div>
+  </a>
   <!--Xiaochen-->
   <a href="https://www.xiaochen.tw/" target="_blank" class="friend-card">
     <img src="../images/XiaoChen.jpg" alt="avatar" class="friend-avatar" onerror="this.src='https://ui-avatars.com/api/?name=燒餅不加蛋&background=random'">
