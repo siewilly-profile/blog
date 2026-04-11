@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>题解 — 南宫有栖</title>
+    <meta name="description" content="南宫有栖的题解筆記。">
+    <link href="../styles/style.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Ma+Shan+Zheng&family=Noto+Serif+TC:wght@400;600;700&family=ZCOOL+XiaoWei&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- 翻頁動畫遮罩 -->
+    <div id="page-transition" class="page-transition-overlay"></div>
+    <nav class="top_list" id="main-nav">
+        <div class="nav-inner">
+            <div class="nav-ornament left-ornament">
+                <span class="ornament-line"></span>
+                <span class="ornament-diamond">&#9670;</span>
+            </div>
+
+            <a href="index.html" class="brand" id="brand-link">
+                <span class="brand-char" style="animation-delay: 0s">南</span>
+                <span class="brand-char" style="animation-delay: 0.1s">宫</span>
+                <span class="brand-char" style="animation-delay: 0.2s">有</span>
+                <span class="brand-char" style="animation-delay: 0.3s">栖</span>
+            </a>
+
+            <div class="nav-divider">
+                <span class="divider-dot">&#8226;</span>
+                <span class="divider-line"></span>
+                <span class="divider-dot">&#8226;</span>
+            </div>
+
+            <div class="nav-links" id="nav-links">
+                <a href="index.html" class="nav-link" id="nav-home">
+                    <span class="link-text">首頁</span>
+                    <span class="link-sub">Home</span>
+                </a>
+                <a href="solution.html" class="nav-link active" id="nav-solution">
+                    <span class="link-text">题解</span>
+                    <span class="link-sub">Solution</span>
+                </a>
+                <a href="blog.html" class="nav-link" id="nav-blog">
+                    <span class="link-text">部落格</span>
+                    <span class="link-sub">Blog</span>
+                </a>
+                <a href="about.html" class="nav-link" id="nav-about">
+                    <span class="link-text">關於</span>
+                    <span class="link-sub">About</span>
+                </a>
+                <a href="friend.html" class="nav-link" id="nav-friend">
+                    <span class="link-text">友鏈</span>
+                    <span class="link-sub">Friend</span>
+                </a>
+            </div>
+
+            <div class="nav-ornament right-ornament">
+                <span class="ornament-diamond">&#9670;</span>
+                <span class="ornament-line"></span>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <div id="content">
+        <div class="post-list-header">
+            <h1 class="post-list-title">题解分类</h1>
+            <p class="post-list-count">選擇题庫以瀏覽题解</p>
+        </div>
+
+        <div class="category-grid" id="category-grid">
+            <a href="APCS.html" class="category-card" id="category-apcs">
+                <div class="category-icon">
+                    <span class="category-seal">策</span>
+                </div>
+                <h2 class="category-name">APCS</h2>
+                <p class="category-desc">大學程式設計先修檢測</p>
+                <span class="category-arrow">→</span>
+            </a>
+
+            <a href="Zerojudge.html" class="category-card" id="category-zerojudge">
+                <div class="category-icon">
+                    <span class="category-seal">策</span>
+                </div>
+                <h2 class="category-name">Zerojudge</h2>
+                <p class="category-desc">線上程式解题系統</p>
+                <span class="category-arrow">→</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- 浮動返回按鈕 -->
+    <button class="floating-back-btn" onclick="if(document.referrer) { history.back(); } else { window.location.href = '../index.html'; }" title="回到上一頁">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+        <span>点我回上页</span>
+    </button>
+    <script src="../js/burger.js"></script>
+
+    <script src="../js/transition.js"></script>
+</body>
+
+</html>

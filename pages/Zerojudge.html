@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zerojudge 题解 — 南宫有栖</title>
+    <meta name="description" content="南宫有栖的 Zerojudge 题解筆記。">
+    <link href="../styles/style.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Ma+Shan+Zheng&family=Noto+Serif+TC:wght@400;600;700&family=ZCOOL+XiaoWei&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+</head>
+
+<body>
+    <!-- 翻頁動畫遮罩 -->
+    <div id="page-transition" class="page-transition-overlay"></div>
+    <nav class="top_list" id="main-nav">
+        <div class="nav-inner">
+            <div class="nav-ornament left-ornament">
+                <span class="ornament-line"></span>
+                <span class="ornament-diamond">&#9670;</span>
+            </div>
+
+            <a href="index.html" class="brand" id="brand-link">
+                <span class="brand-char" style="animation-delay: 0s">南</span>
+                <span class="brand-char" style="animation-delay: 0.1s">宫</span>
+                <span class="brand-char" style="animation-delay: 0.2s">有</span>
+                <span class="brand-char" style="animation-delay: 0.3s">栖</span>
+            </a>
+
+            <div class="nav-divider">
+                <span class="divider-dot">&#8226;</span>
+                <span class="divider-line"></span>
+                <span class="divider-dot">&#8226;</span>
+            </div>
+
+            <div class="nav-links" id="nav-links">
+                <a href="index.html" class="nav-link" id="nav-home">
+                    <span class="link-text">首頁</span>
+                    <span class="link-sub">Home</span>
+                </a>
+                <a href="solution.html" class="nav-link active" id="nav-solution">
+                    <span class="link-text">题解</span>
+                    <span class="link-sub">Solution</span>
+                </a>
+                <a href="blog.html" class="nav-link" id="nav-blog">
+                    <span class="link-text">部落格</span>
+                    <span class="link-sub">Blog</span>
+                </a>
+                <a href="about.html" class="nav-link" id="nav-about">
+                    <span class="link-text">關於</span>
+                    <span class="link-sub">About</span>
+                </a>
+                <a href="friend.html" class="nav-link" id="nav-friend">
+                    <span class="link-text">友鏈</span>
+                    <span class="link-sub">Friend</span>
+                </a>
+            </div>
+
+            <div class="nav-ornament right-ornament">
+                <span class="ornament-diamond">&#9670;</span>
+                <span class="ornament-line"></span>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <div id="solution-category" data-category="Zerojudge" data-label="Zerojudge" data-parent="solution.html"></div>
+    <div class="blog-layout">
+        <aside class="blog-sidebar" id="blog-sidebar">
+            <div class="sidebar-widget">
+                <h3 class="widget-title">搜尋题解</h3>
+                <div class="search-box">
+                    <input type="text" id="search-input" class="search-input" placeholder="輸入關鍵字...">
+                    <button id="search-btn" class="search-btn">🔍</button>
+                </div>
+            </div>
+            <div class="sidebar-widget">
+                <h3 class="widget-title">所有標籤</h3>
+                <div class="tags-cloud" id="tags-cloud">
+                    <!-- 動態載入 tags -->
+                </div>
+            </div>
+        </aside>
+
+        <main class="blog-main">
+            <div id="content"></div>
+        </main>
+    </div>
+
+    <script src="../js/markdown-render.js"></script>
+    <script src="../js/solution-page.js"></script>
+    <!-- 浮動返回按鈕 -->
+    <button class="floating-back-btn" onclick="if(document.referrer) { history.back(); } else { window.location.href = '../index.html'; }" title="回到上一頁">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+        <span>点我回上页</span>
+    </button>
+    <script src="../js/burger.js"></script>
+
+    <script src="../js/transition.js"></script>
+</body>
+
+</html>
