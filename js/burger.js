@@ -159,21 +159,36 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    function loadOptionalEnv() {
+        return new Promise(function (resolve) {
+            var envPath = isInPages ? '../js/env.local.js' : 'js/env.local.js';
+            var script = document.createElement('script');
+            script.src = envPath;
+            script.async = false;
+            script.onload = function () { resolve(true); };
+            script.onerror = function () { resolve(false); };
+            document.head.appendChild(script);
+        });
+    }
+
     // Load optional integrations lazily to avoid blocking first paint.
     var engagementPath = isInPages ? '../js/engagement.js' : 'js/engagement.js';
     var giscusPath = isInPages ? '../js/giscus.js' : 'js/giscus.js';
-    import(engagementPath)
-        .then(function () {
-            if (window.Engagement && typeof window.Engagement.trackPageView === 'function') {
-                window.Engagement.trackPageView();
-            }
-        })
-        .catch(function () {
-            // Keep silent when engagement is not configured yet.
-        });
 
-    import(giscusPath)
-        .catch(function () {
-            // Keep silent when giscus is not configured yet.
-        });
+    loadOptionalEnv().finally(function () {
+        import(engagementPath)
+            .then(function () {
+                if (window.Engagement && typeof window.Engagement.trackPageView === 'function') {
+                    window.Engagement.trackPageView();
+                }
+            })
+            .catch(function () {
+                // Keep silent when engagement is not configured yet.
+            });
+
+        import(giscusPath)
+            .catch(function () {
+                // Keep silent when giscus is not configured yet.
+            });
+    });
 });

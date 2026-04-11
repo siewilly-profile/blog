@@ -148,9 +148,14 @@ python -m http.server 8080
 
 1. 在 GitHub Repository 啟用 Discussions。
 2. 到 <https://giscus.app/> 取得 `repo`、`repoId`、`category`、`categoryId`。
-3. 編輯 `js/giscus-config.js`：
-  - `enabled: true`
-  - 填入上述四個值
+3. 複製 `js/env.local.example.js` 成 `js/env.local.js`。
+4. 在 `js/env.local.js` 設定：
+  - `GISCUS_ENABLED: true`
+  - `GISCUS_REPO`、`GISCUS_REPO_ID`、`GISCUS_CATEGORY`、`GISCUS_CATEGORY_ID`
+
+備註：
+
+- `js/env.local.js` 已被 `.gitignore` 排除，不會被推上 GitHub。
 
 目前掛載位置：
 
@@ -162,9 +167,9 @@ python -m http.server 8080
 
 1. 到 <https://www.goatcounter.com/> 建立站點。
 2. 取得 endpoint（例如 `https://myblog.goatcounter.com/count`）。
-3. 編輯 `js/engagement-config.js`：
-  - `enabled: true`
-  - `endpoint` 改為你的 endpoint
+3. 在 `js/env.local.js` 設定：
+  - `ENGAGEMENT_ENABLED: true`
+  - `ENGAGEMENT_ENDPOINT: "你的 endpoint"`
 
 補充：
 
