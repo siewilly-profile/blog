@@ -181,3 +181,5 @@ python -m http.server 8080
 - 新增文章時，務必同時更新 Markdown 與對應 `posts.json`。
 - 調整資料夾或檔名時，記得同步修正 HTML 的 script 路徑與 JS 的 `fetch` 路徑。
 - `js/legacy/` 為舊版備份，避免在新頁面再引用。
+# 紀念
+4/12我發現了我的網站API在裸奔，現在收起來了耶
