@@ -1142,7 +1142,7 @@ body {
     }
 }
 
-/* Page Transition Overlay (古風翻頁動畫) */
+/* Page Transition Overlay (落紙蓋章動畫) */
 .page-transition-overlay {
     position: fixed;
     top: 0;
@@ -1155,55 +1155,59 @@ body {
         radial-gradient(ellipse at 80% 20%, rgba(184, 134, 11, 0.06) 0%, transparent 60%);
     z-index: 9999;
     pointer-events: none;
-    transform-origin: right center;
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-    box-shadow: -10px 0 30px rgba(44, 44, 44, 0.2);
+    transform-origin: top center;
+    box-shadow: 0 12px 30px rgba(44, 44, 44, 0.2);
+    overflow: hidden;
+    will-change: transform, opacity;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* 加裝訂線點綴 */
+/* 紙張上緣陰影，增加厚度感 */
 .page-transition-overlay::after {
     content: '';
     position: absolute;
-    right: 0;
+    left: 0;
     top: 0;
-    width: 4px;
-    height: 100%;
-    background: linear-gradient(to right, rgba(184, 134, 11, 0.4), rgba(194, 58, 43, 0.6));
-    border-left: 1px solid rgba(44, 44, 44, 0.1);
+    width: 100%;
+    height: 14px;
+    background: linear-gradient(to bottom, rgba(44, 44, 44, 0.18), rgba(44, 44, 44, 0));
+    border-bottom: 1px solid rgba(44, 44, 44, 0.06);
 }
 
-/* 載入進場時：從蓋滿畫面翻開至右側 */
+/* 載入進場時：整張已蓋章的紙往上抽走 */
 .page-transition-overlay.is-entering {
-    animation: pageFlipOpen 0.8s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+    animation: paperPullUpOut 0.68s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-/* 點擊跳轉離開時：從右側翻過來蓋滿畫面 */
+/* 點擊跳轉離開時：紙張自上方落下 */
 .page-transition-overlay.is-leaving {
-    animation: pageFlipClose 0.8s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+    animation: paperDropIn 0.82s cubic-bezier(0.22, 0.85, 0.32, 1) forwards;
 }
 
-@keyframes pageFlipOpen {
+@keyframes paperPullUpOut {
     0% {
-        transform: perspective(1500px) rotateY(0deg);
+        transform: translateY(0);
         opacity: 1;
     }
     100% {
-        transform: perspective(1500px) rotateY(90deg);
-        opacity: 0;
+        transform: translateY(-112%);
+        opacity: 1;
     }
 }
 
-@keyframes pageFlipClose {
+@keyframes paperDropIn {
     0% {
-        transform: perspective(1500px) rotateY(90deg);
-        opacity: 0;
+        transform: translateY(-115%);
+        opacity: 1;
+    }
+    72% {
+        transform: translateY(2%);
+        opacity: 1;
     }
     100% {
-        transform: perspective(1500px) rotateY(0deg);
+        transform: translateY(0);
         opacity: 1;
     }
 }
@@ -1237,7 +1241,63 @@ body {
     
     /* 古風斑駁與微透感 */
     background: transparent;
-    opacity: 0.85;
+    opacity: 0;
+    transform: translateY(0) scale(1);
+    filter: drop-shadow(0 0 0 rgba(194, 58, 43, 0));
+    will-change: transform, opacity, filter;
+}
+
+.page-transition-overlay.is-leaving .transition-seal {
+    animation: sealPressImpact 0.82s cubic-bezier(0.24, 0.72, 0.3, 1) forwards;
+}
+
+.page-transition-overlay.is-entering .transition-seal {
+    animation: sealLiftAway 0.68s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes sealPressImpact {
+    0% {
+        opacity: 0;
+        transform: translateY(-120px) scale(1.14) rotate(-3deg);
+        filter: blur(1.2px) drop-shadow(0 0 0 rgba(194, 58, 43, 0));
+    }
+    42% {
+        opacity: 0.36;
+        transform: translateY(-58px) scale(1.1) rotate(-1.5deg);
+        filter: blur(0.7px) drop-shadow(0 0 2px rgba(194, 58, 43, 0.08));
+    }
+    72% {
+        opacity: 0.8;
+        transform: translateY(-8px) scale(1.03) rotate(0deg);
+        filter: blur(0.2px) drop-shadow(0 0 5px rgba(194, 58, 43, 0.12));
+    }
+    88% {
+        opacity: 0.9;
+        transform: translateY(8px) scale(0.95) rotate(0.2deg);
+        filter: blur(0) drop-shadow(0 0 10px rgba(194, 58, 43, 0.17));
+    }
+    100% {
+        opacity: 0.82;
+        transform: translateY(0) scale(1) rotate(0deg);
+        filter: blur(0) drop-shadow(0 0 4px rgba(194, 58, 43, 0.1));
+    }
+}
+
+@keyframes sealLiftAway {
+    0% {
+        opacity: 0.9;
+        transform: translateY(0) scale(1);
+        filter: blur(0) drop-shadow(0 0 8px rgba(194, 58, 43, 0.15));
+    }
+    36% {
+        opacity: 0.9;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-90px) scale(0.92);
+        filter: blur(1px) drop-shadow(0 0 0 rgba(194, 58, 43, 0));
+    }
 }
 
 /* 友鏈卡片 (Friend Cards) */
