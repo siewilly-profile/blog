@@ -155,7 +155,8 @@ python -m http.server 8080
 備註：
 
 - `.env` 已加入 `.gitignore`，不會被 push 到 GitHub。
-- 網站會由 `js/env-loader.js` 在執行時自動讀取 `.env`。
+- 網站會由 `js/env-loader.js` 在執行時優先讀取 `.env`（本機開發）。
+- 若部署環境拿不到 `.env`（例如 GitHub Pages），會自動回退讀取 `env.public.json`。
 
 目前掛載位置：
 
@@ -175,6 +176,12 @@ python -m http.server 8080
 
 - `viewThrottleMinutes` 預設為 30 分鐘（同頁面節流）。
 - 全站載入統計邏輯由 `js/burger.js` 引入 `js/engagement.js`。
+
+## 設定檔策略
+
+- 本機開發：使用 `.env`（不提交）。
+- 正式部署：使用 `env.public.json`（可提交，內容視為公開設定）。
+- 目前 `giscus` 與 `GoatCounter` 皆可由上述兩種設定檔提供值。
 
 ## 維護建議
 

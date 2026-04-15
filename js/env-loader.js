@@ -1,6 +1,61 @@
 var ENV_CACHE = null;
 var ENV_LOADING_PROMISE = null;
 
+function getEnvCandidates() {
+    if (typeof window === 'undefined' || !window.location) {
+        return ['.env'];
+    }
+
+    var path = window.location.pathname || '/';
+    var fromPages = path.indexOf('/pages/') >= 0;
+
+    if (fromPages) {
+        return ['../.env', '/.env', '.env'];
+    }
+
+    return ['.env', '/.env', '../.env'];
+}
+
+function getPublicEnvCandidates() {
+    if (typeof window === 'undefined' || !window.location) {
+        return ['env.public.json'];
+    }
+
+    var path = window.location.pathname || '/';
+    var fromPages = path.indexOf('/pages/') >= 0;
+
+    if (fromPages) {
+        return ['../env.public.json', '/env.public.json', 'env.public.json'];
+    }
+
+    return ['env.public.json', '/env.public.json', '../env.public.json'];
+}
+
+function tryFetchText(candidates) {
+    var list = candidates || [];
+    var index = 0;
+
+    function next() {
+        if (index >= list.length) {
+            return Promise.resolve('');
+        }
+
+        var url = list[index++];
+        return fetch(url, { cache: 'no-store' })
+            .then(function (response) {
+                if (!response.ok) {
+                    return next();
+                }
+                return response.text();
+            })
+            .catch(function () {
+                return next();
+            });
+    }
+
+    return next();
+}
+
 function parseDotEnv(text) {
     var out = {};
     if (!text) return out;
@@ -60,15 +115,24 @@ function ensureEnvLoaded() {
         return Promise.resolve(ENV_CACHE);
     }
 
-    ENV_LOADING_PROMISE = fetch('../.env', { cache: 'no-store' })
-        .then(function (response) {
-            if (!response.ok) return '';
-            return response.text();
-        })
+    ENV_LOADING_PROMISE = tryFetchText(getEnvCandidates())
         .then(function (text) {
             var parsed = parseDotEnv(text);
-            ENV_CACHE = mergeRuntimeEnv(parsed);
-            return ENV_CACHE;
+            if (Object.keys(parsed).length > 0) {
+                ENV_CACHE = mergeRuntimeEnv(parsed);
+                return ENV_CACHE;
+            }
+
+            return tryFetchText(getPublicEnvCandidates()).then(function (publicText) {
+                var publicParsed = {};
+                try {
+                    publicParsed = publicText ? JSON.parse(publicText) : {};
+                } catch (e) {
+                    publicParsed = {};
+                }
+                ENV_CACHE = mergeRuntimeEnv(publicParsed);
+                return ENV_CACHE;
+            });
         })
         .catch(function () {
             ENV_CACHE = mergeRuntimeEnv({});
