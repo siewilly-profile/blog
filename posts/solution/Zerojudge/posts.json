@@ -78,5 +78,15 @@
             "Zerojudge",
             "APCS/IOI"
         ]
+    },
+    {
+        "slug":"f166",
+        "title":"f166",
+        "date":"2026-04-16",
+        "description":"f166. 傳送點",
+        "tags":[
+            "Zerojudge",
+            "APCS/IOI"
+        ]
     }
 ]
