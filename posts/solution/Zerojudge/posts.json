@@ -88,5 +88,15 @@
             "Zerojudge",
             "APCS/IOI"
         ]
+    },
+    {
+        "slug":"f312",
+        "title":"f312",
+        "date":"2026-04-16",
+        "description":"f312. 1.人力分配",
+        "tags":[
+            "Zerojudge",
+            "APCS/IOI"
+        ]
     }
 ]

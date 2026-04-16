@@ -36,7 +36,10 @@ async function mountGiscus(options) {
         return;
     }
 
-    var term = opts.term || window.location.pathname;
+    var hasExplicitTerm = typeof opts.term === "string" && opts.term.trim() !== "";
+    var term = hasExplicitTerm ? opts.term.trim() : window.location.pathname;
+    // When an explicit term is provided, force `specific` so each post keeps an independent thread.
+    var mapping = hasExplicitTerm ? "specific" : (cfg.mapping || "pathname");
     target.innerHTML = '<div class="comments-card"><h3 class="comments-title">留言板</h3><div id="giscus-thread"></div></div>';
 
     var thread = target.querySelector("#giscus-thread");
@@ -49,7 +52,7 @@ async function mountGiscus(options) {
     script.setAttribute("data-repo-id", cfg.repoId);
     script.setAttribute("data-category", cfg.category);
     script.setAttribute("data-category-id", cfg.categoryId);
-    script.setAttribute("data-mapping", cfg.mapping || "specific");
+    script.setAttribute("data-mapping", mapping);
     script.setAttribute("data-term", term);
     script.setAttribute("data-strict", cfg.strict || "1");
     script.setAttribute("data-reactions-enabled", cfg.reactionsEnabled || "1");
