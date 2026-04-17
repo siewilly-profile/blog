@@ -15,6 +15,104 @@ var searchInput = document.getElementById('search-input');
 var tagsCloud = document.getElementById('tags-cloud');
 var allPostsData = [];
 
+function getCandidatePaths(pathFromPages) {
+    var p = pathFromPages.replace(/^\/+/, '');
+    var hasPages = (window.location.pathname || '/').indexOf('/pages/') >= 0;
+
+    if (hasPages) {
+        return ['../' + p, '/' + p, p];
+    }
+
+    return [p, '/' + p, '../' + p];
+}
+
+async function fetchFirstSuccessful(candidates) {
+    var list = candidates || [];
+    for (var i = 0; i < list.length; i++) {
+        try {
+            var res = await fetch(list[i] + '?t=' + new Date().getTime(), { cache: 'no-store' });
+            if (res.ok) return res;
+        } catch (_) {
+            // Try next candidate.
+        }
+    }
+
+    throw new Error('No fetch candidate succeeded');
+}
+
+async function importFirstSuccessful(candidates) {
+    var list = candidates || [];
+    for (var i = 0; i < list.length; i++) {
+        try {
+            await import(list[i]);
+            return true;
+        } catch (_) {
+            // Try next candidate.
+        }
+    }
+
+    return false;
+}
+
+async function ensureGiscusLoaded() {
+    if (window.GiscusIntegration && typeof window.GiscusIntegration.mountGiscus === 'function') {
+        return true;
+    }
+
+    return importFirstSuccessful(getCandidatePaths('js/giscus.js'));
+}
+
+async function ensureEngagementLoaded() {
+    if (window.Engagement && typeof window.Engagement.trackPageView === 'function') {
+        return true;
+    }
+
+    return importFirstSuccessful(getCandidatePaths('js/engagement.js'));
+}
+
+function parseMarkdown(markdownText) {
+    if (window.MarkdownRenderer && typeof window.MarkdownRenderer.parse === 'function') {
+        return window.MarkdownRenderer.parse(markdownText || '');
+    }
+
+    if (window.marked && typeof window.marked.parse === 'function') {
+        if (typeof window.marked.setOptions === 'function') {
+            window.marked.setOptions({ gfm: true, breaks: true });
+        }
+        return window.marked.parse(markdownText || '');
+    }
+
+    return markdownText || '';
+}
+
+function enhanceMarkdown(container) {
+    if (!container) return;
+
+    if (window.MarkdownRenderer && typeof window.MarkdownRenderer.enhance === 'function') {
+        window.MarkdownRenderer.enhance(container);
+        return;
+    }
+
+    if (window.hljs && typeof window.hljs.highlightElement === 'function') {
+        var blocks = container.querySelectorAll('pre code');
+        blocks.forEach(function (block) {
+            window.hljs.highlightElement(block);
+        });
+    }
+
+    if (typeof window.renderMathInElement === 'function') {
+        window.renderMathInElement(container, {
+            delimiters: [
+                { left: '$$', right: '$$', display: true },
+                { left: '$', right: '$', display: false }
+            ],
+            throwOnError: false,
+            strict: 'ignore',
+            ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        });
+    }
+}
+
 if (postName) {
     // 渲染單篇文章
     renderBlogMarkdown(postName);
@@ -26,15 +124,13 @@ if (postName) {
 async function fetchPosts() {
     if (allPostsData.length > 0) return allPostsData;
     try {
-        var response = await fetch('../posts/blog/posts.json?t=' + new Date().getTime());
-        if (response.ok) {
-            allPostsData = await response.json();
-            allPostsData.sort(function(a, b) {
-                return new Date(b.date) - new Date(a.date);
-            });
-        }
+        var response = await fetchFirstSuccessful(getCandidatePaths('posts/blog/posts.json'));
+        allPostsData = await response.json();
+        allPostsData.sort(function(a, b) {
+            return new Date(b.date) - new Date(a.date);
+        });
     } catch (e) {
-        console.error("Failed to fetch posts.json");
+        console.error('Failed to fetch posts.json', e);
     }
     return allPostsData;
 }
@@ -264,10 +360,7 @@ async function renderBlogMarkdown(slug) {
     setupSearch();
 
     try {
-        var response = await fetch('../posts/blog/' + slug + '.md?t=' + new Date().getTime());
-        if (!response.ok) {
-            throw new Error('File not found');
-        }
+        var response = await fetchFirstSuccessful(getCandidatePaths('posts/blog/' + slug + '.md'));
 
         var markdownText = await response.text();
         // Calculate rough reading stats
@@ -302,18 +395,17 @@ async function renderBlogMarkdown(slug) {
         html += '</div>';
         
         // Render Markdown to HTML 
-        var articleHtml = window.MarkdownRenderer && typeof window.MarkdownRenderer.parse === 'function'
-            ? window.MarkdownRenderer.parse(markdownText)
-            : marked.parse(markdownText);
+        var articleHtml = parseMarkdown(markdownText);
         html += '<div class="article-body">' + articleHtml + '</div>';
         html += '<section class="comments-panel" id="comments"></section>';
 
         contentTarget.innerHTML = html;
 
         var articleBodyEl = contentTarget.querySelector('.article-body');
-        if (window.MarkdownRenderer && typeof window.MarkdownRenderer.enhance === 'function') {
-            window.MarkdownRenderer.enhance(articleBodyEl);
-        }
+        enhanceMarkdown(articleBodyEl);
+
+        await ensureEngagementLoaded();
+        await ensureGiscusLoaded();
 
         if (window.Engagement && typeof window.Engagement.trackPageView === 'function') {
             window.Engagement.trackPageView({
@@ -338,6 +430,11 @@ async function renderBlogMarkdown(slug) {
                 containerSelector: '#comments',
                 term: '/blog/' + slug
             });
+        } else {
+            var commentsHost = document.getElementById('comments');
+            if (commentsHost) {
+                commentsHost.innerHTML = '<div class="comments-card giscus-hint"><p>留言模組載入失敗，請稍後重試。</p></div>';
+            }
         }
 
     } catch (error) {
