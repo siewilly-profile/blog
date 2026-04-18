@@ -2135,11 +2135,12 @@ body {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    height: 60px; 
-    padding: 0 5px 0 15px;
+    width: 60px;
+    height: 60px;
+    padding: 0;
     background-color: var(--paper-light, #fdf8e6);
     border: 2px solid var(--vermillion, #CE5C5C);
-    border-radius: 30px;
+    border-radius: 999px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2160,6 +2161,9 @@ body {
 }
 
 .back-to-top-wrapper:hover {
+    width: 180px;
+    padding: 0 12px 0 16px;
+    justify-content: flex-end;
     opacity: 1;
     transform: translateY(-5px);
     background-color: var(--vermillion, #CE5C5C);
@@ -2185,15 +2189,21 @@ body {
 }
 
 .back-to-top-seal {
-    width: 50px; 
+    width: 50px;
     height: 50px;
+    min-width: 50px;
+    min-height: 50px;
+    aspect-ratio: 1 / 1;
+    box-sizing: border-box;
     border: 2px solid var(--vermillion);
     border-radius: 50%;
     background-color: var(--paper-warm);
     color: transparent;
     -webkit-text-stroke: 1.2px var(--vermillion);
+    text-shadow: 0 0 0 var(--vermillion);
     font-family: var(--font-brand);
     font-size: 26px;
+    line-height: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2204,12 +2214,14 @@ body {
     animation: rotateSeal 15s linear infinite;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     flex-shrink: 0;
+    transform-origin: center center;
 }
 
 .back-to-top-wrapper:hover .back-to-top-seal {
     animation-play-state: paused;
     color: var(--vermillion);
     -webkit-text-stroke: 0px;
+    text-shadow: none;
     background-color: var(--paper-light);
     border-color: transparent;
     box-shadow: 

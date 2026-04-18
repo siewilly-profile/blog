@@ -178,12 +178,20 @@ function setupSearch() {
 
     var pageName = location.pathname.split('/').pop();
 
+    function navigate(url) {
+        if (window.PageTransition && typeof window.PageTransition.navigate === 'function') {
+            window.PageTransition.navigate(url);
+            return;
+        }
+        window.location.href = url;
+    }
+
     function doSearch() {
         var q = searchInput.value.trim();
         if(q) {
-            window.location.href = pageName + '?q=' + encodeURIComponent(q);
+            navigate(pageName + '?q=' + encodeURIComponent(q));
         } else {
-            window.location.href = pageName;
+            navigate(pageName);
         }
     }
 

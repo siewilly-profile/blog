@@ -334,12 +334,20 @@ function setupSearch() {
     var searchBtn = document.getElementById('search-btn');
     if (!searchInput || !searchBtn) return;
 
+    function navigate(url) {
+        if (window.PageTransition && typeof window.PageTransition.navigate === 'function') {
+            window.PageTransition.navigate(url);
+            return;
+        }
+        window.location.href = url;
+    }
+
     function doSearch() {
         var q = searchInput.value.trim();
         if(q) {
-            window.location.href = 'blog.html?q=' + encodeURIComponent(q);
+            navigate('blog.html?q=' + encodeURIComponent(q));
         } else {
-            window.location.href = 'blog.html';
+            navigate('blog.html');
         }
     }
 
